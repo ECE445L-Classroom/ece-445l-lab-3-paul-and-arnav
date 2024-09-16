@@ -1,4 +1,5 @@
 #include "Sound_Driver.h"
+#include "../inc/tm4c123gh6pm.h"
 
 int dac_init() {
     /**
