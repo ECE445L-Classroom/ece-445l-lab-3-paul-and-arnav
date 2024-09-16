@@ -1,0 +1,10 @@
+{
+    "files.associations": {
+        "sound_driver.h": "c",
+        "tm4c123gh6pm.h": "c",
+        "stdint.h": "c",
+        "dac.h": "c",
+        "*.tcc": "c",
+        "chrono": "c"
+    }
+}

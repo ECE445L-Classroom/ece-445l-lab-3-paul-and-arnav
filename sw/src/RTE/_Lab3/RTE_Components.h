@@ -14,7 +14,7 @@
 /*
  * Define the Device Header File: 
  */
-#define CMSIS_device_header "LM4F120H5QR.h"
+#define CMSIS_device_header "TM4C123.h"
 
 
 
