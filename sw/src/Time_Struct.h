@@ -8,7 +8,8 @@ typedef struct {
 } Time;
 
 // Function prototypes
-void initTime(Time *time, uint8_t hours, uint8_t minutes, uint8_t seconds);
+void setTimeValues(Time *time, uint8_t hours, uint8_t minutes, uint8_t seconds);
+uint8_t compareTimes(Time *time1, Time *time2);
 void incrementTime(Time *time, uint8_t position);
 void decrementTime(Time *time, uint8_t position);
 void convertTo12Hour(Time *time, Time *newTime);

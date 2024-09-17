@@ -5,6 +5,9 @@
         "stdint.h": "c",
         "dac.h": "c",
         "*.tcc": "c",
-        "chrono": "c"
+        "chrono": "c",
+        "st7735.h": "c",
+        "systick_driver.h": "c",
+        "systick.h": "c"
     }
 }

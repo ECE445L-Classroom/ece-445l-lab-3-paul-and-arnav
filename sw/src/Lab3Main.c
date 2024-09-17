@@ -57,47 +57,55 @@ void WaitForInterrupt(void);  // low power mode
 void handleSetting(Time *timeVar, uint32_t switchReading, uint8_t *pos, uint32_t *FSMState);
 void Clock_Delay1ms(uint32_t n);
 
-int main(void){
+int main1(void){
   DisableInterrupts();
   PLL_Init(Bus80MHz);    // bus clock at 80 MHz
 
-  // write this
   Switch_Init();
 
-  //Interrupt for the alarm
+  //TODO: Interrupt for the alarm
     // If b0 is pressed, then the alarm will be snoozed for 5 min*
     // If b1 is pressed, then the alarm will be turned off
 
 
-  //Also initialize an interrupt for the sound
+  //TODO: Also initialize an interrupt for the sound
 
+  Time newTime;
   Time currTime;
-  initTime(&currTime, 1, 0, 0);
+  setTimeValues(&currTime, 1, 0, 0);
+  setTimeValues(&newTime, 1, 0, 0);
   Time currAlarm;
-  initTime(&currAlarm, 1, 0, 0);
+  setTimeValues(&currAlarm, 1, 0, 0);
   uint8_t timePosition = 0;
   uint32_t FSM_State = home;
   uint8_t timeMode = twelveHour;
   uint8_t displayMode = digital;
   uint8_t colorScheme = light;
 
+  //TODO: Update LCD with currTime
+
   EnableInterrupts();
 
   while(1){
+      if (compareTimes(&currTime, &newTime) != 0) {
+        // TODO: Update the LCD with the new time
+        setTimeValues(&currTime, newTime.hours, newTime.minutes, newTime.seconds);
+      }
+
       // write this
       uint32_t switchReading = getSwitchReading();
 
       switch (FSM_State){
         case home:
           if (switchReading == alarmOnOff) {
-            // Toggle the alarm (start the timer interrupt)
+            //TODO: Toggle the alarm (start the timer interrupt)
           } else if (switchReading >= 0x1 && switchReading <= 0x4) {
             FSM_State = switchReading;
           }
           break;
 
         case setTime:
-          handleSetting(&currTime, switchReading, &timePosition, &FSM_State);
+          handleSetting(&newTime, switchReading, &timePosition, &FSM_State);
           break;
 
         case setAlarm:
@@ -106,15 +114,15 @@ int main(void){
 
         case changeDisplayMode:
           if (switchReading == changeClockMode) {
-            // Change the display mode between analog and digital
+            //TODO: Change the display mode between analog and digital
             displayMode = !displayMode;
             FSM_State = home;
           } else if (switchReading == changeTimeMode) {
-            // Change the display mode between regular and military time
+            //TODO: Change the display mode between regular and military time
             timeMode = !timeMode;
             FSM_State = home;
           } else if (switchReading == changeColorScheme) {
-            // Change the color scheme (Dark/Light Mode)
+            //TODO: Change the color scheme (Dark/Light Mode)
             colorScheme = !colorScheme;
             FSM_State = home;
           }

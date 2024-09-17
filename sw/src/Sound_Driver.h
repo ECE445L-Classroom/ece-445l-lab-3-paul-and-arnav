@@ -22,7 +22,7 @@
  * @return int 0 if initialization was successful or a positive integer if an
  *         error occurred. <TODO: LIST ERROR CODES AND POSSIBLE ERROR EVENTS>
  */
-int dac_init();
+void DAC_INIT(uint16_t data);
 
 /**
  * @brief dac_output tells the DAC to output a specified voltage.
@@ -32,4 +32,4 @@ int dac_init();
  * @return int 0 if initialization was successful or a positive integer if an
  *         error occurred. <TODO: LIST ERROR CODES AND POSSIBLE ERROR EVENTS>
  */
-int dac_output(uint16_t data);
+void DAC_OUT(uint16_t code);
