@@ -28,9 +28,17 @@ void incrementTime(Time *time, uint8_t position){
     if (position < 2) {
         time->hours = (time->hours + incAmt) % 24;    
     } else if (position < 4) {
-        time->minutes = (time->minutes + incAmt) % 60;
+        uint8_t new_minutes = time->minutes + incAmt;
+        time->minutes = (new_minutes) % 60;
+        if (new_minutes >= 60) {
+            incrementTime(time, 1);
+        }
     } else if (position < 6) {
-        time->seconds = (time->seconds + incAmt) % 60;
+        uint8_t new_seconds = time->seconds + incAmt;
+        time->seconds = (new_seconds) % 60;
+        if (new_seconds >= 60) {
+            incrementTime(time, 3);
+        }
     }
 }
 

@@ -3382,6 +3382,12 @@
 		(uuid "1c9f2e4f-7d30-4277-8b2e-3d5194463366")
 	)
 	(junction
+		(at 269.24 149.86)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "2120e0ee-7a96-4da7-9806-7897b470fa06")
+	)
+	(junction
 		(at 41.91 106.68)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -3424,6 +3430,12 @@
 		(uuid "7981269f-299d-4556-aa64-6da71c52d028")
 	)
 	(junction
+		(at 257.81 138.43)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "817de6ae-5f7c-439d-ab7d-833eed866717")
+	)
+	(junction
 		(at 60.96 90.17)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -3436,10 +3448,22 @@
 		(uuid "9b177467-8e66-49e5-b847-49f8e04c1761")
 	)
 	(junction
+		(at 257.81 149.86)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "a805b837-a0c7-45ff-be9f-337d5a96cd88")
+	)
+	(junction
 		(at 41.91 114.3)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "b74deaa4-3eb0-48b7-aaab-13edf6eb5522")
+	)
+	(junction
+		(at 257.81 156.21)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "c005ad33-e9ab-4987-b171-de35c9c064d5")
 	)
 	(junction
 		(at 142.875 40.64)
@@ -3458,6 +3482,12 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "ee1d6a19-f8cd-47e0-afe2-9980a88ded11")
+	)
+	(junction
+		(at 247.65 149.86)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "fdb1ee7c-1cc6-4d5a-b20a-e7cefadae311")
 	)
 	(no_connect
 		(at 25.4 34.29)
@@ -3592,6 +3622,16 @@
 			(type default)
 		)
 		(uuid "208555a1-3f90-4d80-bb4a-744a01281467")
+	)
+	(wire
+		(pts
+			(xy 257.81 134.62) (xy 257.81 138.43)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "216a7a5d-bc62-4036-a259-34e71463213e")
 	)
 	(wire
 		(pts
@@ -3775,6 +3815,16 @@
 	)
 	(wire
 		(pts
+			(xy 269.24 149.86) (xy 269.24 151.13)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "42cccb7f-7cfe-435c-a305-58b85647eee3")
+	)
+	(wire
+		(pts
 			(xy 24.13 72.39) (xy 25.4 72.39)
 		)
 		(stroke
@@ -3782,6 +3832,16 @@
 			(type default)
 		)
 		(uuid "478d89be-283b-4cd9-905b-be72ae4f167b")
+	)
+	(wire
+		(pts
+			(xy 247.65 148.59) (xy 247.65 149.86)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "48d343fd-d570-456f-a57c-a067254c6d63")
 	)
 	(wire
 		(pts
@@ -3845,6 +3905,16 @@
 	)
 	(wire
 		(pts
+			(xy 256.54 149.86) (xy 257.81 149.86)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "54369e5b-fb23-4f94-8f06-05bbbe39261d")
+	)
+	(wire
+		(pts
 			(xy 23.495 49.53) (xy 25.4 49.53)
 		)
 		(stroke
@@ -3905,6 +3975,16 @@
 	)
 	(wire
 		(pts
+			(xy 247.65 156.21) (xy 257.81 156.21)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "630b8350-2343-43cd-9cb6-c2a4dfec0346")
+	)
+	(wire
+		(pts
 			(xy 60.96 34.29) (xy 65.405 34.29)
 		)
 		(stroke
@@ -3935,6 +4015,16 @@
 	)
 	(wire
 		(pts
+			(xy 247.65 138.43) (xy 257.81 138.43)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "71b5a525-cac2-41ca-95a0-e93b9f3cab9c")
+	)
+	(wire
+		(pts
 			(xy 97.79 45.085) (xy 97.79 45.72)
 		)
 		(stroke
@@ -3942,6 +4032,16 @@
 			(type default)
 		)
 		(uuid "748de45e-8e59-4985-9ac3-7e65970fc8ad")
+	)
+	(wire
+		(pts
+			(xy 257.81 148.59) (xy 257.81 149.86)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "7530c5d0-19ae-412d-8ece-dba6fd392cb9")
 	)
 	(wire
 		(pts
@@ -4025,6 +4125,16 @@
 	)
 	(wire
 		(pts
+			(xy 266.7 149.86) (xy 269.24 149.86)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "852b688c-1877-447d-9528-41c702c28b79")
+	)
+	(wire
+		(pts
 			(xy 142.875 40.64) (xy 147.955 40.64)
 		)
 		(stroke
@@ -4095,6 +4205,26 @@
 	)
 	(wire
 		(pts
+			(xy 257.81 156.21) (xy 269.24 156.21)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "9ad95bcd-37ce-4c55-be7a-f847b17e0cbc")
+	)
+	(wire
+		(pts
+			(xy 257.81 138.43) (xy 269.24 138.43)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "9b381536-584d-4607-8dcb-4615c7c53257")
+	)
+	(wire
+		(pts
 			(xy 44.45 114.3) (xy 45.72 114.3)
 		)
 		(stroke
@@ -4122,6 +4252,16 @@
 			(type default)
 		)
 		(uuid "a0f5bfa6-c6af-4025-b7d3-c8297d1f6ada")
+	)
+	(wire
+		(pts
+			(xy 257.81 156.21) (xy 257.81 158.75)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a69615ab-ea7e-4223-b4db-e9efe8e7a67f")
 	)
 	(wire
 		(pts
@@ -4315,6 +4455,16 @@
 	)
 	(wire
 		(pts
+			(xy 257.81 149.86) (xy 257.81 151.13)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "d0d717a8-cbaf-45e4-9f27-1e9dd771a1e9")
+	)
+	(wire
+		(pts
 			(xy 214.63 132.715) (xy 214.63 135.255)
 		)
 		(stroke
@@ -4475,6 +4625,16 @@
 	)
 	(wire
 		(pts
+			(xy 245.11 149.86) (xy 247.65 149.86)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e83546c5-ac4e-437f-b424-1d6e68123b53")
+	)
+	(wire
+		(pts
 			(xy 23.495 59.69) (xy 25.4 59.69)
 		)
 		(stroke
@@ -4492,6 +4652,16 @@
 			(type default)
 		)
 		(uuid "ec5ebd40-144f-49eb-a2c7-dd864a09598f")
+	)
+	(wire
+		(pts
+			(xy 269.24 148.59) (xy 269.24 149.86)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "ed0ee577-61d7-4a00-883c-dc59b2efb81e")
 	)
 	(wire
 		(pts
@@ -4562,6 +4732,16 @@
 			(type default)
 		)
 		(uuid "f76be4f7-ad2f-44fc-adbe-484a326364bf")
+	)
+	(wire
+		(pts
+			(xy 247.65 149.86) (xy 247.65 151.13)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "fea8479c-8112-4956-95ff-c8116b73027f")
 	)
 	(text_box "MCU"
 		(exclude_from_sim no)
@@ -4648,7 +4828,7 @@
 	)
 	(text_box "Pushbuttons"
 		(exclude_from_sim no)
-		(at 245.11 125.73 0)
+		(at 261.62 127 0)
 		(size 21.59 7.62)
 		(stroke
 			(width 0)
@@ -5166,7 +5346,7 @@
 	)
 	(global_label "PE1"
 		(shape input)
-		(at 255.905 137.16 180)
+		(at 256.54 149.86 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -5176,7 +5356,7 @@
 		)
 		(uuid "5c06de23-fac2-46c1-92d1-71a2b68d17ce")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 249.2913 137.16 0)
+			(at 249.9263 149.86 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5364,7 +5544,7 @@
 	)
 	(global_label "PE0"
 		(shape input)
-		(at 246.38 137.16 180)
+		(at 245.11 149.86 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -5374,7 +5554,7 @@
 		)
 		(uuid "7e542b86-455b-47ca-9b45-edb61c90abfd")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 239.7663 137.16 0)
+			(at 238.4963 149.86 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5408,7 +5588,7 @@
 	)
 	(global_label "PE2"
 		(shape input)
-		(at 267.97 137.16 180)
+		(at 266.7 149.86 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -5418,7 +5598,7 @@
 		)
 		(uuid "813b2dc9-a091-4fb4-8cf0-7b9671d9b5b7")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 261.3563 137.16 0)
+			(at 260.0863 149.86 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6614,6 +6794,73 @@
 		)
 	)
 	(symbol
+		(lib_id "ECE445L:R_0.125W")
+		(at 257.81 153.67 180)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "230828bd-0afb-4068-b6e3-90eff03304db")
+		(property "Reference" "R3"
+			(at 255.524 154.432 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "330"
+			(at 261.112 153.924 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "ECE445L:R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal"
+			(at 257.81 153.67 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://users.ece.utexas.edu/~valvano/mspm0/CarbonFilmresistors.pdf"
+			(at 257.81 153.67 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor, small US symbol"
+			(at 257.81 153.67 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "0b4abf03-3200-412e-9181-9a2012a25125")
+		)
+		(pin "1"
+			(uuid "d327c492-d667-430e-9b3a-f6917175a1f1")
+		)
+		(instances
+			(project "baseline_project"
+				(path "/69b823fd-c065-40ff-9bb9-c5835555f3eb"
+					(reference "R3")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "power:PWR_FLAG")
 		(at 64.77 29.21 270)
 		(unit 1)
@@ -7282,7 +7529,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 257.81 157.48 0)
+		(at 257.81 158.75 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -7291,7 +7538,7 @@
 		(fields_autoplaced yes)
 		(uuid "52343db8-a3b4-4e93-851e-03939d825917")
 		(property "Reference" "#PWR0107"
-			(at 257.81 163.83 0)
+			(at 257.81 165.1 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7300,7 +7547,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 257.81 162.56 0)
+			(at 257.81 163.83 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7308,7 +7555,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 257.81 157.48 0)
+			(at 257.81 158.75 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7317,7 +7564,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 257.81 157.48 0)
+			(at 257.81 158.75 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7326,7 +7573,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 257.81 157.48 0)
+			(at 257.81 158.75 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7475,6 +7722,73 @@
 			(project "baseline_project"
 				(path "/69b823fd-c065-40ff-9bb9-c5835555f3eb"
 					(reference "C101")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "ECE445L:R_0.125W")
+		(at 269.24 153.67 180)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "68d2cd70-7832-4e0b-851c-77f1a1f2d66d")
+		(property "Reference" "R4"
+			(at 266.954 154.432 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "330"
+			(at 272.542 153.924 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "ECE445L:R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal"
+			(at 269.24 153.67 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://users.ece.utexas.edu/~valvano/mspm0/CarbonFilmresistors.pdf"
+			(at 269.24 153.67 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor, small US symbol"
+			(at 269.24 153.67 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "828d30b5-b6ef-4794-ad15-1baeeac6d460")
+		)
+		(pin "1"
+			(uuid "c1a65b74-2d59-4b24-91fd-84ed3d11f449")
+		)
+		(instances
+			(project "baseline_project"
+				(path "/69b823fd-c065-40ff-9bb9-c5835555f3eb"
+					(reference "R4")
 					(unit 1)
 				)
 			)
@@ -8549,6 +8863,73 @@
 		)
 	)
 	(symbol
+		(lib_id "ECE445L:R_0.125W")
+		(at 247.65 153.67 180)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "cf46f5ce-e586-465c-a040-637262fd6bd2")
+		(property "Reference" "R2"
+			(at 245.364 154.432 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "330"
+			(at 250.952 153.924 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "ECE445L:R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal"
+			(at 247.65 153.67 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://users.ece.utexas.edu/~valvano/mspm0/CarbonFilmresistors.pdf"
+			(at 247.65 153.67 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor, small US symbol"
+			(at 247.65 153.67 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "80dadb41-2f59-4bf0-81df-620c837b17cc")
+		)
+		(pin "1"
+			(uuid "8c215904-287d-4b4b-8efb-e30038c97ad0")
+		)
+		(instances
+			(project "baseline_project"
+				(path "/69b823fd-c065-40ff-9bb9-c5835555f3eb"
+					(reference "R2")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "power:GND")
 		(at 60.96 90.17 0)
 		(unit 1)
@@ -8830,6 +9211,71 @@
 			(project ""
 				(path "/69b823fd-c065-40ff-9bb9-c5835555f3eb"
 					(reference "U102")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:+3V3")
+		(at 257.81 134.62 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "e7a21036-b068-43d5-852c-6b0686dcacbf")
+		(property "Reference" "#PWR06"
+			(at 257.81 138.43 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "+3V3"
+			(at 257.81 130.81 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 257.81 134.62 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 257.81 134.62 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"+3V3\""
+			(at 257.81 134.62 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "94c84663-5b94-4946-b724-4791dead07e5")
+		)
+		(instances
+			(project "baseline_project"
+				(path "/69b823fd-c065-40ff-9bb9-c5835555f3eb"
+					(reference "#PWR06")
 					(unit 1)
 				)
 			)

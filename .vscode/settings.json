@@ -8,6 +8,8 @@
         "chrono": "c",
         "st7735.h": "c",
         "systick_driver.h": "c",
-        "systick.h": "c"
+        "systick.h": "c",
+        "unified_port_init.h": "c",
+        "timer0a.h": "c"
     }
 }

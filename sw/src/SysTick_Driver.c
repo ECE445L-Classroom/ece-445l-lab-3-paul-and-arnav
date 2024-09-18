@@ -34,9 +34,9 @@ void SysTick_Handler(void){
     Counts = Counts + 1;
 }
 
-int main(void){
-  PLL_Init(Bus80MHz);
-  Init(80000000);
-	EnableInterrupts();
-  while(1){};
-}
+// int main(void){
+//   PLL_Init(Bus80MHz);
+//   Init(80000000);
+// 	EnableInterrupts();
+//   while(1){};
+// }
