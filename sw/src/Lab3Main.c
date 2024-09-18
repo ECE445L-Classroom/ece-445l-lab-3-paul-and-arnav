@@ -44,7 +44,7 @@
 #include "Global_Define.h"
 #include "Switch_Driver.h"
 #include "LCD_Driver.h"
-#include "SysTick_Driver.h"
+#include "Interrupts_Driver.h"
 #include "Sound_Driver.h"
 
 #define home 0
@@ -54,86 +54,114 @@ void DisableInterrupts(void); // Disable interrupts
 void EnableInterrupts(void);  // Enable interrupts
 void WaitForInterrupt(void);  // low power mode
 void handleSetting(Time *timeVar, uint32_t switchReading, uint8_t *pos, uint32_t *FSMState);
+void DrawTime(uint8_t timeMode, uint8_t displayMode, uint8_t colorScheme, uint8_t *prevColorScheme, Time *timeVar);
 void Clock_Delay1ms(uint32_t n);
 
-// int main(void){
-//   DisableInterrupts();
-//   PLL_Init(Bus80MHz);    // bus clock at 80 MHz
-//   ST7735_InitR(INITR_REDTAB);
-//   Systick_Init(8000000000); 
+int main(void){
+  DisableInterrupts();
+  PLL_Init(Bus80MHz);    // bus clock at 80 MHz
+  ST7735_InitR(INITR_REDTAB);
+  //Systick_Init(80000 * 1000); // 1 second
+  Clock_Count_Init(80000 * 1000); // 1 second
+  Switch_Init();
 
-//   Switch_Init();
-
-//   //TODO: Interrupt for the alarm
-//     // If b0 is pressed, then the alarm will be snoozed for 5 min*
-//     // If b1 is pressed, then the alarm will be turned off
+  //TODO: Interrupt for the alarm
+    // If b0 is pressed, then the alarm will be snoozed for 5 min*
+    // If b1 is pressed, then the alarm will be turned off
 
 
-//   //TODO: Also initialize an interrupt for the sound
+  //TODO: Also initialize an interrupt for the sound
 
-//   Time currTime;
-//   setTimeValues(&currTime, 1, 0, 0);
-//   Time currAlarm;
-//   setTimeValues(&currAlarm, 1, 0, 0);
-//   uint8_t timePosition = 0;
-//   uint32_t FSM_State = home;
-//   uint8_t timeMode = twelveHour;
-//   uint8_t displayMode = digital;
-//   uint8_t colorScheme = light;
+  Time currTime;
+  setTimeValues(&currTime, 1, 0, 0);
+  Time currAlarm;
+  setTimeValues(&currAlarm, 1, 0, 0);
+  uint8_t timePosition = 0;
+  uint32_t FSM_State = home;
+  uint8_t timeMode = twelveHour;
+  uint8_t displayMode = digital;
+  uint8_t prevColorScheme = dark;
+  uint8_t colorScheme = dark;
 
-//   EnableInterrupts();
+  EnableInterrupts();
 
-//   while(1){
-//       if (compareTimes(&currTime, &newTime) != 0) {
-//         DrawTimeDigital(&newTime, ST7735_BLUE, ST7735_BLACK);
-//         setTimeValues(&currTime, newTime.hours, newTime.minutes, newTime.seconds);
-//       }
+  while(1){
+      // write this
+      uint32_t switchReading = getSwitchReading();
 
-//       // write this
-//       uint32_t switchReading = getSwitchReading();
+      switch (FSM_State){
+        case home:
+          if (compareTimes(&currTime, &newTime) != 0) {
+            DrawTime(timeMode, displayMode, colorScheme, &prevColorScheme, &newTime);
+            setTimeValues(&currTime, newTime.hours, newTime.minutes, newTime.seconds);
+          }
 
-//       switch (FSM_State){
-//         case home:
-//           if (switchReading == alarmOnOff) {
-//             //TODO: Toggle the alarm (start the timer interrupt)
-//           } else if (switchReading >= 0x1 && switchReading <= 0x4) {
-//             FSM_State = switchReading;
-//           }
-//           break;
+          if (switchReading == alarmOnOff) {
+            //TODO: Toggle the alarm (start the timer interrupt)
+          } else if (switchReading >= 0x1 && switchReading <= 0x4) {
+            FSM_State = switchReading;
+          }
+          break;
 
-//         case setTime:
-//           handleSetting(&newTime, switchReading, &timePosition, &FSM_State);
-//           break;
+        case setTime:
+          DrawTime(timeMode, digital, colorScheme, &prevColorScheme, &currTime);
+          handleSetting(&newTime, switchReading, &timePosition, &FSM_State);
+          break;
 
-//         case setAlarm:
-//           handleSetting(&currAlarm, switchReading, &timePosition, &FSM_State);
-//           break;
+        case setAlarm:
+          DrawTime(timeMode, digital, colorScheme, &prevColorScheme, &currAlarm);
+          handleSetting(&currAlarm, switchReading, &timePosition, &FSM_State);
+          break;
 
-//         case changeDisplayMode:
-//           if (switchReading == changeClockMode) {
-//             //TODO: Change the display mode between analog and digital
-//             displayMode = !displayMode;
-//             FSM_State = home;
-//           } else if (switchReading == changeTimeMode) {
-//             //TODO: Change the display mode between regular and military time
-//             timeMode = !timeMode;
-//             FSM_State = home;
-//           } else if (switchReading == changeColorScheme) {
-//             //TODO: Change the color scheme (Dark/Light Mode)
-//             colorScheme = !colorScheme;
-//             FSM_State = home;
-//           }
-//           break;
+        case changeDisplayMode:
+          if (switchReading == changeClockMode) {
+            //Change the display mode between analog and digital
+            displayMode = !displayMode;
+            FSM_State = home;
+          } else if (switchReading == changeTimeMode) {
+            //Change the display mode between regular and military time
+            timeMode = !timeMode;
+            FSM_State = home;
+          } else if (switchReading == changeColorScheme) {
+            //Change the color scheme (Dark/Light Mode)
+            colorScheme = !colorScheme;
+            FSM_State = home;
+          }
+          break;
         
-//         default:
-//           //No buttons or an invalid combination was pressed
-//           break;
-//       }
+        default:
+          //No buttons or an invalid combination was pressed
+          break;
+      }
 
-//       //Debounce the switches
-//       Clock_Delay1ms(10);
-//   }
-// }
+      //Debounce the switches
+      Clock_Delay1ms(10);
+  }
+}
+
+void DrawTime(uint8_t timeMode, uint8_t displayMode, uint8_t colorScheme, uint8_t *prevColorScheme, Time *timeVar) {
+  uint16_t main_color;
+  uint16_t background_color;
+
+  if (colorScheme == dark) {
+    main_color = ST7735_BLUE;
+    background_color = ST7735_BLACK;
+  } else {
+    main_color = ST7735_BLACK;
+    background_color = ST7735_WHITE;
+  }
+
+  if (colorScheme != *prevColorScheme) {
+    setBackGround(background_color, displayMode);
+    *prevColorScheme = colorScheme;
+  }
+
+  if (displayMode == digital) {
+    DrawTimeDigital(&newTime, timeMode, main_color, background_color);
+  } else {
+    DrawTimeAnalog(&newTime, NULL, main_color, background_color);
+  }
+}
 
 void handleSetting(Time *timeVar, uint32_t switchReading, uint8_t *pos, uint32_t *FSMState) {
   if (switchReading == changePos) {

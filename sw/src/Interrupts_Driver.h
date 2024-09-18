@@ -4,4 +4,4 @@
 extern Time newTime;
 
 void Systick_Init(uint32_t period);
-void SysTick_Handler(void);
+void Clock_Count_Init(uint32_t period);

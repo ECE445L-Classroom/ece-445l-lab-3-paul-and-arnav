@@ -10,6 +10,7 @@
         "systick_driver.h": "c",
         "systick.h": "c",
         "unified_port_init.h": "c",
-        "timer0a.h": "c"
+        "timer0a.h": "c",
+        "cortexm.h": "c"
     }
 }

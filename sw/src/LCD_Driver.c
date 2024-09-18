@@ -4,8 +4,11 @@
 #include "../inc/PLL.h"
 #include "../inc/ST7735.h"
 #include "../inc/CortexM.h"
+#include "Global_Define.h"
 
-#define PI 3.14159265358979323846
+#define hoursNum 0
+#define minutesNum 1
+#define secondsNum 2
 
 const unsigned short clock[] = {
  0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000,
@@ -422,7 +425,7 @@ void DrawNumber(int x, int y, int number, uint16_t color, uint16_t backgroundCol
     }
 }
 
-void DrawTimeDigital(Time *timeVar, uint16_t color, uint16_t backgroundColor){
+void DrawTimeDigital(Time *timeVar, int timeMode, uint16_t color, uint16_t backgroundColor){
     char str[10]; //array of numbers
 
     if (timeVar->hours < 10) {
@@ -448,37 +451,99 @@ void DrawTimeDigital(Time *timeVar, uint16_t color, uint16_t backgroundColor){
         ST7735_DrawCharS(7 + (i * 15), 15, str[i], color, backgroundColor, 2);
     }
 }
+const int32_t SinArr[64] = {
+    0, 26, 51, 77, 102, 128, 154, 179,
+    205, 230, 255, 256, 255, 243, 230,
+    218, 205, 192, 179, 166, 154, 141,
+    128, 115, 102, 90, 77, 64, 51,
+    38, 26, 13, 0, -13, -26, -38,
+    -51, -64, -77, -90, -102, -115, -128,
+    -141, -154, -166, -179, -192, -205, -218,
+    -230, -243, -255, -256, -255, -243, -230,
+    -218, -205, -192, -179, -166, -154, -141};
 
-void DrawHand(int x, int y, float angle, int length, uint16_t color){
-    int x2 = x + (int)(length * cos(angle));
-    int y2 = y + (int)(length * sin());
-    ST7735_DrawLine(x, y, x2, y2, color);
+const int32_t CosArr[64] = {
+    256, 255, 255, 255, 243, 230, 218, 205,
+    192, 179, 166, 154, 141, 128, 115, 102,
+    90, 77, 64, 51, 38, 26, 13, 0,
+    -13, -26, -38, -51, -64, -77, -90, -102,
+    -115, -128, -141, -154, -166, -179, -192, -205,
+    -218, -230, -243, -255, -256, -255, -255, -255,
+    -243, -230, -218, -205, -192, -179, -166, -154,
+    -141, -128, -115, -102, -90, -77, -64, -51
+};
+
+void DrawHand(int x, int y, int angle, int length, uint16_t color){
+    int x2 = x + (length * CosArr[angle] / 256);
+    int y2 = y + (length * SinArr[angle] / 256);
+    ST7735_Line(x, y, x2, y2, color);
 }
 
-void DrawTimeAnalog(Time *timeVar, uint16_t color, uint16_t backgroundColor){
-    ST7735_DrawBitmap(24, 120, clock, 80, 80);
-
-    float hourMovement = ((timeVar->hours % 12) + timeVar->minutes / 60.0) * (PI / 6);
-
-    DrawHand(64, 80, hourMovement, 30, ST7735_BLUE);
-
+void ClearPrevTimeAnalog(Time *timeVar, uint16_t backgroundColor, uint8_t field) {
+    if (field == hoursNum){
+        int hourMovement = (((timeVar->hours % 12) * 5) + timeVar->minutes / 12); //30 degree per hour
+        DrawHand(62, 80, hourMovement, 10, backgroundColor);
+    } else if (field == minutesNum){
+        int minuteMovement = timeVar->minutes; // 6 degrees per minute
+        DrawHand(62, 80, minuteMovement, 15, backgroundColor);
+    } else if (field == secondsNum){
+        int secondMovement = timeVar->seconds; // 6 degrees per second
+        DrawHand(62, 80, secondMovement, 20, backgroundColor);
+    }
 }
 
+void DrawTimeAnalog(Time *timeVar, Time *prevTime, uint16_t color, uint16_t backgroundColor){
+    //ST7735_DrawBitmap(24, 120, clock, 80, 80); //clockface
 
-int main(void) {
-    PLL_Init(Bus80MHz);    // bus clock at 80 MHz
-    ST7735_InitR(INITR_REDTAB);
-
-    Time time;
-    setTimeValues(&time, 23, 58, 15);
-
-    while(1) {
-        //DrawTimeDigital(&time, ST7735_BLUE, ST7735_BLACK);
-        DrawTimeAnalog(&time, ST7735_BLUE, ST7735_BLACK); 
-        incrementTime(&time, 5);
-        Clock_Delay1ms(50);
+    if (timeVar->hours != prevTime->hours){
+        ClearPrevTimeAnalog(prevTime, backgroundColor, hoursNum);
     }
 
-    //DrawNumber(10,10,7,ST7735_BLUE,ST7735_BLACK);
-    //ST7735_FillScreen(ST7735_RED);
+    if (timeVar->minutes != prevTime->minutes){
+        ClearPrevTimeAnalog(prevTime, backgroundColor, minutesNum);
+    }
+
+    if (timeVar->seconds != prevTime->seconds){
+        ClearPrevTimeAnalog(prevTime, backgroundColor, secondsNum);
+    }
+
+    int hourMovement = (((timeVar->hours % 12) * 5) + timeVar->minutes / 12); //30 degree per hour
+    int minuteMovement = timeVar->minutes; // 6 degrees per minute
+    int secondMovement = timeVar->seconds; // 6 degrees per second
+
+    DrawHand(62, 80, hourMovement, 10, ST7735_BLUE);
+    DrawHand(62, 80, minuteMovement, 15, ST7735_GREEN);
+    DrawHand(62, 80, secondMovement, 20, ST7735_RED);
+
 }
+
+void setBackGround(uint16_t color, uint8_t displayMode){
+    ST7735_FillScreen(color);
+
+    if (displayMode == analog){
+        ST7735_DrawBitmap(24, 120, clock, 80, 80); //clockface
+    }
+}
+
+
+// int main(void) {
+//     PLL_Init(Bus80MHz);    // bus clock at 80 MHz
+//     ST7735_InitR(INITR_REDTAB);
+
+//     Time time;
+//     Time prevTime;
+//     setTimeValues(&time, 23, 58, 15);
+//     setTimeValues(&prevTime, 23, 58, 15);
+//     setBackGround(ST7735_BLACK, analog);
+
+//     while(1) {
+//         //DrawTimeDigital(&time, ST7735_BLUE, ST7735_BLACK);
+//         DrawTimeAnalog(&time, &prevTime, ST7735_BLUE, ST7735_BLACK);
+//         setTimeValues(&prevTime, time.hours, time.minutes, time.seconds); 
+//         incrementTime(&time, 5);
+//         Clock_Delay1ms(1000);
+//     }
+
+//     //DrawNumber(10,10,7,ST7735_BLUE,ST7735_BLACK);
+//     //ST7735_FillScreen(ST7735_RED);
+// }
