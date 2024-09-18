@@ -409,6 +409,41 @@
               <FileType>1</FileType>
               <FilePath>..\inc\ST7735.c</FilePath>
             </File>
+            <File>
+              <FileName>LCD_Driver.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\LCD_Driver.c</FilePath>
+            </File>
+            <File>
+              <FileName>Sound_Driver.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Sound_Driver.c</FilePath>
+            </File>
+            <File>
+              <FileName>Switch_Driver.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Switch_Driver.c</FilePath>
+            </File>
+            <File>
+              <FileName>SysTick_Driver.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\SysTick_Driver.c</FilePath>
+            </File>
+            <File>
+              <FileName>Time_Struct.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Time_Struct.c</FilePath>
+            </File>
+            <File>
+              <FileName>CortexM.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\inc\CortexM.c</FilePath>
+            </File>
+            <File>
+              <FileName>SysTick.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\inc\SysTick.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

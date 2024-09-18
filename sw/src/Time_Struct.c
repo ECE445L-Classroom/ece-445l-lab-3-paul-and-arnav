@@ -1,9 +1,22 @@
 #include "Time_Struct.h"
 
-void initTime(Time *time, uint8_t hours, uint8_t minutes, uint8_t seconds) {
+uint8_t modNegative(int num, int mod);
+
+void setTimeValues(Time *time, uint8_t hours, uint8_t minutes, uint8_t seconds) {
     time->hours = hours;
     time->minutes = minutes;
     time->seconds = seconds;
+}
+
+uint8_t compareTimes(Time *time1, Time *time2) {
+    if (time1->hours != time2->hours) {
+        return 1;
+    } else if (time1->minutes != time2->minutes) {
+        return 1;
+    } else if (time1->seconds != time2->seconds) {
+        return 1;
+    }
+    return 0;
 }
 
 void incrementTime(Time *time, uint8_t position){
@@ -45,7 +58,7 @@ uint8_t modNegative(int num, int mod) {
 }
 
 void convertTo12Hour(Time *time, Time *newTime) {
-    initTime(&newTime, time->hours, time->minutes, time->seconds);
+    setTimeValues(newTime, time->hours, time->minutes, time->seconds);
     if (newTime->hours > 12) {
         newTime->hours -= 12;
     } else if (newTime->hours == 0) {

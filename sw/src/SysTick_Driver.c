@@ -1,34 +1,42 @@
 #include "SysTick_Driver.h"
 #include "../inc/tm4c123gh6pm.h"
+#include "../inc/SysTick.h"
+#include "../inc/PLL.h"
+void DisableInterrupts(void); // Disable interrupts
+void EnableInterrupts(void);  // Enable interrupts
 
-void SysTick_Init(void){
-  NVIC_ST_CTRL_R = 0;                   // disable SysTick during setup
-  NVIC_ST_RELOAD_R = NVIC_ST_RELOAD_M;  // maximum reload value
-  NVIC_ST_CURRENT_R = 0;                // any write to current clears it
-                                        // enable SysTick with core clock
-  NVIC_ST_CTRL_R = NVIC_ST_CTRL_ENABLE+NVIC_ST_CTRL_CLK_SRC;
+
+volatile uint32_t Counts;
+
+void Init(uint32_t period){
+
+  SYSCTL_RCGCGPIO_R |= 0x20;     // 1) activate Port F
+  Counts = 0;
+  while((SYSCTL_PRGPIO_R & 0x20)!=0x20){}; // wait to finish activating
+  GPIO_PORTF_LOCK_R = GPIO_LOCK_KEY;// 2a) unlock GPIO Port F Commit Register
+  GPIO_PORTF_CR_R = 0x1F;        // 2b) enable commit for PF4-PF0
+  GPIO_PORTF_AMSEL_R &= ~0x1F;   // 3) disable analog functionality on PF4-PF0
+  GPIO_PORTF_PCTL_R = 0x00000000;// 4) configure PF0-PF4 as GPIO
+  GPIO_PORTF_DIR_R = 0x0E;       // 5) make PF0 and PF4 in PF3-1 output
+  GPIO_PORTF_AFSEL_R = 0;        // 6) disable alt funct on PF0 and PF4
+  GPIO_PORTF_PUR_R = 0x11;       // enable weak pull-up on PF0 and PF4
+  GPIO_PORTF_DEN_R = 0x1F;       // 7) enable digital I/O on PF0-PF4
+  
+  NVIC_ST_CTRL_R = 0;
+  NVIC_ST_RELOAD_R = period - 1;
+  NVIC_ST_CURRENT_R = 0;
+  NVIC_SYS_PRI3_R = (NVIC_SYS_PRI3_R&0x00FFFFFF)|0x40000000; // priority 2
+  NVIC_ST_CTRL_R = 0x00000007;
 }
 
-void SysTick_Wait(uint32_t delay){
-  NVIC_ST_RELOAD_R = delay-1;  // number of counts to wait
-  NVIC_ST_CURRENT_R = 0;       // any value written to CURRENT clears
-  while((NVIC_ST_CTRL_R&0x00010000)==0){ // wait for count flag
-  }
+void SysTick_Handler(void){
+    GPIO_PORTF_DATA_R ^= 0x02; //Toggle the LED 
+    Counts = Counts + 1;
 }
 
-uint32_t Time;
-// start the stopwatch
-void SysTick_Start(void){
-  Time = NVIC_ST_CURRENT_R;
-}
-// end the stopwatch, and return elased time in bus cycles
-uint32_t SysTick_Stop(void){
-  return (Time-NVIC_ST_CURRENT_R)&0x00FFFFFF;
-}
-
-void SysTick_Wait1s(uint32_t delay){
-  uint32_t i;
-  for(i=0; i<delay; i++){
-    SysTick_Wait(80000000);  // wait 1s
-  }
+int main(void){
+  PLL_Init(Bus80MHz);
+  Init(80000000);
+	EnableInterrupts();
+  while(1){};
 }
