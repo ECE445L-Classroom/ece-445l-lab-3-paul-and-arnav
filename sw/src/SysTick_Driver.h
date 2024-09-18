@@ -1,5 +1,7 @@
 #include <stdint.h>
+#include "Time_Struct.h"
 
+extern Time newTime;
 
-void Init(uint32_t period);
+void Systick_Init(uint32_t period);
 void SysTick_Handler(void);

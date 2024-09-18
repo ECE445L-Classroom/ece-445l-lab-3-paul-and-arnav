@@ -42,7 +42,6 @@
 
 // Module Imports
 #include "Global_Define.h"
-#include "Time_Struct.h"
 #include "Switch_Driver.h"
 #include "LCD_Driver.h"
 #include "SysTick_Driver.h"
@@ -57,9 +56,11 @@ void WaitForInterrupt(void);  // low power mode
 void handleSetting(Time *timeVar, uint32_t switchReading, uint8_t *pos, uint32_t *FSMState);
 void Clock_Delay1ms(uint32_t n);
 
-int main1(void){
+int main(void){
   DisableInterrupts();
   PLL_Init(Bus80MHz);    // bus clock at 80 MHz
+  ST7735_InitR(INITR_REDTAB);
+  Systick_Init(8000000000); 
 
   Switch_Init();
 
@@ -70,10 +71,8 @@ int main1(void){
 
   //TODO: Also initialize an interrupt for the sound
 
-  Time newTime;
   Time currTime;
   setTimeValues(&currTime, 1, 0, 0);
-  setTimeValues(&newTime, 1, 0, 0);
   Time currAlarm;
   setTimeValues(&currAlarm, 1, 0, 0);
   uint8_t timePosition = 0;
@@ -82,13 +81,11 @@ int main1(void){
   uint8_t displayMode = digital;
   uint8_t colorScheme = light;
 
-  //TODO: Update LCD with currTime
-
   EnableInterrupts();
 
   while(1){
       if (compareTimes(&currTime, &newTime) != 0) {
-        // TODO: Update the LCD with the new time
+        DrawTimeDigital(&newTime, ST7735_BLUE, ST7735_BLACK);
         setTimeValues(&currTime, newTime.hours, newTime.minutes, newTime.seconds);
       }
 

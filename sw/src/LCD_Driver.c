@@ -4,7 +4,6 @@
 #include "../inc/PLL.h"
 #include "../inc/ST7735.h"
 #include "../inc/CortexM.h"
-#include "Time_Struct.h"
 
 void DrawNumber(int x, int y, int number, uint16_t color, uint16_t backgroundColor){
     char str[10]; //array of numbers
@@ -47,19 +46,19 @@ void DrawTimeAnalog(){
 }
 
 
-int main(void) {
-    PLL_Init(Bus80MHz);    // bus clock at 80 MHz
-    ST7735_InitR(INITR_REDTAB);
+// int main(void) {
+//     PLL_Init(Bus80MHz);    // bus clock at 80 MHz
+//     ST7735_InitR(INITR_REDTAB);
 
-    Time time;
-    setTimeValues(&time, 23, 58, 15);
+//     Time time;
+//     setTimeValues(&time, 23, 58, 15);
 
-    while(1) {
-        DrawTimeDigital(&time, ST7735_BLUE, ST7735_BLACK);
-        incrementTime(&time, 5);
-        Clock_Delay1ms(50);
-    }
+//     while(1) {
+//         DrawTimeDigital(&time, ST7735_BLUE, ST7735_BLACK);
+//         incrementTime(&time, 5);
+//         Clock_Delay1ms(50);
+//     }
 
-    //DrawNumber(10,10,7,ST7735_BLUE,ST7735_BLACK);
-    //ST7735_FillScreen(ST7735_RED);
-}
+//     //DrawNumber(10,10,7,ST7735_BLUE,ST7735_BLACK);
+//     //ST7735_FillScreen(ST7735_RED);
+// }

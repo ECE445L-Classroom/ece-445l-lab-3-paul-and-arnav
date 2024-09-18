@@ -2,16 +2,16 @@
 #include "../inc/tm4c123gh6pm.h"
 #include "../inc/SysTick.h"
 #include "../inc/PLL.h"
+
 void DisableInterrupts(void); // Disable interrupts
 void EnableInterrupts(void);  // Enable interrupts
 
+Time newTime;
 
-volatile uint32_t Counts;
-
-void Init(uint32_t period){
+void Systick_Init(uint32_t period){
 
   SYSCTL_RCGCGPIO_R |= 0x20;     // 1) activate Port F
-  Counts = 0;
+  setTimeValues(&newTime, 1, 0, 0);
   while((SYSCTL_PRGPIO_R & 0x20)!=0x20){}; // wait to finish activating
   GPIO_PORTF_LOCK_R = GPIO_LOCK_KEY;// 2a) unlock GPIO Port F Commit Register
   GPIO_PORTF_CR_R = 0x1F;        // 2b) enable commit for PF4-PF0
@@ -31,7 +31,7 @@ void Init(uint32_t period){
 
 void SysTick_Handler(void){
     GPIO_PORTF_DATA_R ^= 0x02; //Toggle the LED 
-    Counts = Counts + 1;
+    incrementTime(&newTime, 5);
 }
 
 // int main(void){
