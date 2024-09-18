@@ -56,84 +56,84 @@ void WaitForInterrupt(void);  // low power mode
 void handleSetting(Time *timeVar, uint32_t switchReading, uint8_t *pos, uint32_t *FSMState);
 void Clock_Delay1ms(uint32_t n);
 
-int main(void){
-  DisableInterrupts();
-  PLL_Init(Bus80MHz);    // bus clock at 80 MHz
-  ST7735_InitR(INITR_REDTAB);
-  Systick_Init(8000000000); 
+// int main(void){
+//   DisableInterrupts();
+//   PLL_Init(Bus80MHz);    // bus clock at 80 MHz
+//   ST7735_InitR(INITR_REDTAB);
+//   Systick_Init(8000000000); 
 
-  Switch_Init();
+//   Switch_Init();
 
-  //TODO: Interrupt for the alarm
-    // If b0 is pressed, then the alarm will be snoozed for 5 min*
-    // If b1 is pressed, then the alarm will be turned off
+//   //TODO: Interrupt for the alarm
+//     // If b0 is pressed, then the alarm will be snoozed for 5 min*
+//     // If b1 is pressed, then the alarm will be turned off
 
 
-  //TODO: Also initialize an interrupt for the sound
+//   //TODO: Also initialize an interrupt for the sound
 
-  Time currTime;
-  setTimeValues(&currTime, 1, 0, 0);
-  Time currAlarm;
-  setTimeValues(&currAlarm, 1, 0, 0);
-  uint8_t timePosition = 0;
-  uint32_t FSM_State = home;
-  uint8_t timeMode = twelveHour;
-  uint8_t displayMode = digital;
-  uint8_t colorScheme = light;
+//   Time currTime;
+//   setTimeValues(&currTime, 1, 0, 0);
+//   Time currAlarm;
+//   setTimeValues(&currAlarm, 1, 0, 0);
+//   uint8_t timePosition = 0;
+//   uint32_t FSM_State = home;
+//   uint8_t timeMode = twelveHour;
+//   uint8_t displayMode = digital;
+//   uint8_t colorScheme = light;
 
-  EnableInterrupts();
+//   EnableInterrupts();
 
-  while(1){
-      if (compareTimes(&currTime, &newTime) != 0) {
-        DrawTimeDigital(&newTime, ST7735_BLUE, ST7735_BLACK);
-        setTimeValues(&currTime, newTime.hours, newTime.minutes, newTime.seconds);
-      }
+//   while(1){
+//       if (compareTimes(&currTime, &newTime) != 0) {
+//         DrawTimeDigital(&newTime, ST7735_BLUE, ST7735_BLACK);
+//         setTimeValues(&currTime, newTime.hours, newTime.minutes, newTime.seconds);
+//       }
 
-      // write this
-      uint32_t switchReading = getSwitchReading();
+//       // write this
+//       uint32_t switchReading = getSwitchReading();
 
-      switch (FSM_State){
-        case home:
-          if (switchReading == alarmOnOff) {
-            //TODO: Toggle the alarm (start the timer interrupt)
-          } else if (switchReading >= 0x1 && switchReading <= 0x4) {
-            FSM_State = switchReading;
-          }
-          break;
+//       switch (FSM_State){
+//         case home:
+//           if (switchReading == alarmOnOff) {
+//             //TODO: Toggle the alarm (start the timer interrupt)
+//           } else if (switchReading >= 0x1 && switchReading <= 0x4) {
+//             FSM_State = switchReading;
+//           }
+//           break;
 
-        case setTime:
-          handleSetting(&newTime, switchReading, &timePosition, &FSM_State);
-          break;
+//         case setTime:
+//           handleSetting(&newTime, switchReading, &timePosition, &FSM_State);
+//           break;
 
-        case setAlarm:
-          handleSetting(&currAlarm, switchReading, &timePosition, &FSM_State);
-          break;
+//         case setAlarm:
+//           handleSetting(&currAlarm, switchReading, &timePosition, &FSM_State);
+//           break;
 
-        case changeDisplayMode:
-          if (switchReading == changeClockMode) {
-            //TODO: Change the display mode between analog and digital
-            displayMode = !displayMode;
-            FSM_State = home;
-          } else if (switchReading == changeTimeMode) {
-            //TODO: Change the display mode between regular and military time
-            timeMode = !timeMode;
-            FSM_State = home;
-          } else if (switchReading == changeColorScheme) {
-            //TODO: Change the color scheme (Dark/Light Mode)
-            colorScheme = !colorScheme;
-            FSM_State = home;
-          }
-          break;
+//         case changeDisplayMode:
+//           if (switchReading == changeClockMode) {
+//             //TODO: Change the display mode between analog and digital
+//             displayMode = !displayMode;
+//             FSM_State = home;
+//           } else if (switchReading == changeTimeMode) {
+//             //TODO: Change the display mode between regular and military time
+//             timeMode = !timeMode;
+//             FSM_State = home;
+//           } else if (switchReading == changeColorScheme) {
+//             //TODO: Change the color scheme (Dark/Light Mode)
+//             colorScheme = !colorScheme;
+//             FSM_State = home;
+//           }
+//           break;
         
-        default:
-          //No buttons or an invalid combination was pressed
-          break;
-      }
+//         default:
+//           //No buttons or an invalid combination was pressed
+//           break;
+//       }
 
-      //Debounce the switches
-      Clock_Delay1ms(10);
-  }
-}
+//       //Debounce the switches
+//       Clock_Delay1ms(10);
+//   }
+// }
 
 void handleSetting(Time *timeVar, uint32_t switchReading, uint8_t *pos, uint32_t *FSMState) {
   if (switchReading == changePos) {
