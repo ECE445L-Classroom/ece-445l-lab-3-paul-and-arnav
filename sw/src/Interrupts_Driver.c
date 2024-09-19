@@ -40,7 +40,7 @@ void Heartbeat_Init() {
 }
 
 void Clock_Count_Init(uint32_t period){
-  setTimeValues(&newTime, 1, 0, 0);
+  setTimeValues(&newTime, 13, 32, 55);
   Heartbeat_Init();
   Timer0A_Init(&Counter_Func, period, 1);
 }

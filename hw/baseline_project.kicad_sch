@@ -5916,7 +5916,7 @@
 			)
 		)
 	)
-	(global_label "PD5"
+	(global_label "PB5"
 		(shape input)
 		(at 189.23 143.51 180)
 		(fields_autoplaced yes)

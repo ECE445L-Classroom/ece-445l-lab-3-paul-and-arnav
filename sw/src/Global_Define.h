@@ -25,3 +25,8 @@
 // Color Schemes
 #define dark 0
 #define light 1
+
+// Menu Numbers
+#define homeMenu 0
+#define modesMenu 1
+#define setMenu 2
