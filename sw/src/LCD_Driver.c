@@ -466,13 +466,13 @@ void DrawHand(int x, int y, int angle, int length, uint16_t color){
 
 void ClearPrevTimeAnalog(Time *timeVar, uint16_t backgroundColor, uint8_t field) {
     if (field == hoursNum){
-        int hourMovement = (((timeVar->hours % 12) * 5) + timeVar->minutes / 12) % 360; //30 degree per hour
+        int hourMovement = (((timeVar->hours % 12) * 5) + timeVar->minutes / 12); //30 degree per hour
         DrawHand(62, 80, hourMovement, 10, backgroundColor);
     } else if (field == minutesNum){
-        int minuteMovement = timeVar->minutes % 360; // 6 degrees per minute
+        int minuteMovement = timeVar->minutes / 6; // 6 degrees per minute
         DrawHand(62, 80, minuteMovement, 15, backgroundColor);
     } else if (field == secondsNum){
-        int secondMovement = timeVar->seconds % 360; // 6 degrees per second
+        int secondMovement = timeVar->seconds / 6; // 6 degrees per second
         DrawHand(62, 80, secondMovement, 20, backgroundColor);
     }
 }
