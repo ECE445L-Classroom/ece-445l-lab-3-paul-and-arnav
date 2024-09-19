@@ -451,27 +451,12 @@ void DrawTimeDigital(Time *timeVar, int timeMode, uint16_t color, uint16_t backg
         ST7735_DrawCharS(7 + (i * 15), 15, str[i], color, backgroundColor, 2);
     }
 }
-const int32_t SinArr[64] = {
-    0, 26, 51, 77, 102, 128, 154, 179,
-    205, 230, 255, 256, 255, 243, 230,
-    218, 205, 192, 179, 166, 154, 141,
-    128, 115, 102, 90, 77, 64, 51,
-    38, 26, 13, 0, -13, -26, -38,
-    -51, -64, -77, -90, -102, -115, -128,
-    -141, -154, -166, -179, -192, -205, -218,
-    -230, -243, -255, -256, -255, -243, -230,
-    -218, -205, -192, -179, -166, -154, -141};
+const int32_t SinArr[360] = {
+0, 1, 3, 5, 6, 8, 10, 12, 13, 15, 17, 19, 20, 22, 24, 25, 27, 29, 30, 32, 34, 35, 37, 39, 40, 42, 43, 45, 47, 48, 50, 51, 53, 54, 56, 57, 58, 60, 61, 63, 64, 65, 67, 68, 69, 70, 72, 73, 74, 75, 76, 77, 78, 80, 81, 82, 83, 84, 84, 85, 86, 87, 88, 89, 90, 90, 91, 92, 92, 93, 94, 94, 95, 95, 96, 96, 97, 97, 97, 98, 98, 98, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 98, 98, 98, 98, 97, 97, 96, 96, 95, 95, 94, 94, 93, 93, 92, 91, 91, 90, 89, 88, 88, 87, 86, 85, 84, 83, 82, 81, 80, 79, 78, 77, 76, 75, 73, 72, 71, 70, 68, 67, 66, 65, 63, 62, 61, 59, 58, 56, 55, 53, 52, 50, 49, 47, 46, 44, 43, 41, 39, 38, 36, 35, 33, 31, 30, 28, 26, 25, 23, 21, 19, 18, 16, 14, 13, 11, 9, 7, 6, 4, 2, 0, 0, -2, -4, -6, -7, -9, -11, -13, -14, -16, -18, -19, -21, -23, -25, -26, -28, -30, -31, -33, -35, -36, -38, -39, -41, -43, -44, -46, -47, -49, -50, -52, -53, -55, -56, -58, -59, -61, -62, -63, -65, -66, -67, -68, -70, -71, -72, -73, -75, -76, -77, -78, -79, -80, -81, -82, -83, -84, -85, -86, -87, -88, -88, -89, -90, -91, -91, -92, -93, -93, -94, -94, -95, -95, -96, -96, -97, -97, -98, -98, -98, -98, -99, -99, -99, -99, -99, -99, -99, -99, -99, -99, -99, -99, -99, -99, -99, -99, -98, -98, -98, -97, -97, -97, -96, -96, -95, -95, -94, -94, -93, -92, -92, -91, -90, -90, -89, -88, -87, -86, -85, -84, -84, -83, -82, -81, -80, -78, -77, -76, -75, -74, -73, -72, -70, -69, -68, -67, -65, -64, -63, -61, -60, -58, -57, -56, -54, -53, -51, -50, -48, -47, -45, -43, -42, -40, -39, -37, -35, -34, -32, -30, -29, -27, -25, -24, -22, -20, -19, -17, -15, -13, -12, -10, -8, -6, -5, -3, -1, 0};
 
-const int32_t CosArr[64] = {
-    256, 255, 255, 255, 243, 230, 218, 205,
-    192, 179, 166, 154, 141, 128, 115, 102,
-    90, 77, 64, 51, 38, 26, 13, 0,
-    -13, -26, -38, -51, -64, -77, -90, -102,
-    -115, -128, -141, -154, -166, -179, -192, -205,
-    -218, -230, -243, -255, -256, -255, -255, -255,
-    -243, -230, -218, -205, -192, -179, -166, -154,
-    -141, -128, -115, -102, -90, -77, -64, -51
-};
+const int32_t CosArr[360] = {
+100, 99, 99, 99, 99, 99, 99, 99, 99, 98, 98, 98, 97, 97, 97, 96, 96, 95, 95, 94, 93, 93, 92, 92, 91, 90, 89, 89, 88, 87, 86, 85, 84, 83, 82, 81, 80, 79, 78, 77, 76, 75, 74, 72, 71, 70, 69, 68, 66, 65, 64, 62, 61, 59, 58, 57, 55, 54, 52, 51, 49, 48, 46, 45, 43, 41, 40, 38, 37, 35, 33, 32, 30, 28, 27, 25, 23, 22, 20, 18, 16, 15, 13, 11, 10, 8, 6, 4, 3, 1, 0, -2, -3, -5, -7, -9, -10, -12, -14, -16, -17, -19, -21, -22, -24, -26, -28, -29, -31, -33, -34, -36, -37, -39, -41, -42, -44, -45, -47, -48, -50, -52, -53, -54, -56, -57, -59, -60, -62, -63, -64, -66, -67, -68, -69, -71, -72, -73, -74, -75, -77, -78, -79, -80, -81, -82, -83, -84, -85, -86, -86, -87, -88, -89, -90, -90, -91, -92, -93, -93, -94, -94, -95, -95, -96, -96, -97, -97, -97, -98, -98, -98, -99, -99, -99, -99, -99, -99, -99, -99, -99, -99, -99, -99, -99, -99, -99, -99, -98, -98, -98, -97, -97, -97, -96, -96, -95, -95, -94, -94, -93, -93, -92, -91, -90, -90, -89, -88, -87, -86, -86, -85, -84, -83, -82, -81, -80, -79, -78, -77, -75, -74, -73, -72, -71, -69, -68, -67, -66, -64, -63, -62, -60, -59, -57, -56, -54, -53, -52, -50, -48, -47, -45, -44, -42, -41, -39, -37, -36, -34, -33, -31, -29, -28, -26, -24, -22, -21, -19, -17, -16, -14, -12, -10, -9, -7, -5, -3, -2, 0, 1, 3, 4, 6, 8, 10, 11, 13, 15, 16, 18, 20, 22, 23, 25, 27, 28, 30, 32, 33, 35, 37, 38, 40, 41, 43, 45, 46, 48, 49, 51, 52, 54, 55, 57, 58, 59, 61, 62, 64, 65, 66, 68, 69, 70, 71, 72, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 89, 90, 91, 92, 92, 93, 93, 94, 95, 95, 96, 96, 97, 97, 97, 98, 98, 98, 99, 99, 99, 99, 99, 99, 99, 99, 100};
+
 
 void DrawHand(int x, int y, int angle, int length, uint16_t color){
     int x2 = x + (length * CosArr[angle] / 256);
@@ -481,13 +466,13 @@ void DrawHand(int x, int y, int angle, int length, uint16_t color){
 
 void ClearPrevTimeAnalog(Time *timeVar, uint16_t backgroundColor, uint8_t field) {
     if (field == hoursNum){
-        int hourMovement = (((timeVar->hours % 12) * 5) + timeVar->minutes / 12); //30 degree per hour
+        int hourMovement = (((timeVar->hours % 12) * 5) + timeVar->minutes / 12) % 360; //30 degree per hour
         DrawHand(62, 80, hourMovement, 10, backgroundColor);
     } else if (field == minutesNum){
-        int minuteMovement = timeVar->minutes; // 6 degrees per minute
+        int minuteMovement = timeVar->minutes % 360; // 6 degrees per minute
         DrawHand(62, 80, minuteMovement, 15, backgroundColor);
     } else if (field == secondsNum){
-        int secondMovement = timeVar->seconds; // 6 degrees per second
+        int secondMovement = timeVar->seconds % 360; // 6 degrees per second
         DrawHand(62, 80, secondMovement, 20, backgroundColor);
     }
 }
@@ -508,8 +493,8 @@ void DrawTimeAnalog(Time *timeVar, Time *prevTime, uint16_t color, uint16_t back
     }
 
     int hourMovement = (((timeVar->hours % 12) * 5) + timeVar->minutes / 12); //30 degree per hour
-    int minuteMovement = timeVar->minutes; // 6 degrees per minute
-    int secondMovement = timeVar->seconds; // 6 degrees per second
+    int minuteMovement = timeVar->minutes / 6; // 6 degrees per minute
+    int secondMovement = timeVar->seconds / 6; // 6 degrees per second
 
     DrawHand(62, 80, hourMovement, 10, ST7735_BLUE);
     DrawHand(62, 80, minuteMovement, 15, ST7735_GREEN);
@@ -526,24 +511,24 @@ void setBackGround(uint16_t color, uint8_t displayMode){
 }
 
 
-// int main(void) {
-//     PLL_Init(Bus80MHz);    // bus clock at 80 MHz
-//     ST7735_InitR(INITR_REDTAB);
+int main(void) {
+    PLL_Init(Bus80MHz);    // bus clock at 80 MHz
+    ST7735_InitR(INITR_REDTAB);
 
-//     Time time;
-//     Time prevTime;
-//     setTimeValues(&time, 23, 58, 15);
-//     setTimeValues(&prevTime, 23, 58, 15);
-//     setBackGround(ST7735_BLACK, analog);
+    Time time;
+    Time prevTime;
+    setTimeValues(&time, 23, 58, 15);
+    setTimeValues(&prevTime, 23, 58, 15);
+    setBackGround(ST7735_BLACK, analog);
 
-//     while(1) {
-//         //DrawTimeDigital(&time, ST7735_BLUE, ST7735_BLACK);
-//         DrawTimeAnalog(&time, &prevTime, ST7735_BLUE, ST7735_BLACK);
-//         setTimeValues(&prevTime, time.hours, time.minutes, time.seconds); 
-//         incrementTime(&time, 5);
-//         Clock_Delay1ms(1000);
-//     }
+    while(1) {
+        //DrawTimeDigital(&time, ST7735_BLUE, ST7735_BLACK);
+        DrawTimeAnalog(&time, &prevTime, ST7735_BLUE, ST7735_BLACK);
+        setTimeValues(&prevTime, time.hours, time.minutes, time.seconds); 
+        incrementTime(&time, 5);
+        Clock_Delay1ms(1000);
+    }
 
-//     //DrawNumber(10,10,7,ST7735_BLUE,ST7735_BLACK);
-//     //ST7735_FillScreen(ST7735_RED);
-// }
+    //DrawNumber(10,10,7,ST7735_BLUE,ST7735_BLACK);
+    //ST7735_FillScreen(ST7735_RED);
+}

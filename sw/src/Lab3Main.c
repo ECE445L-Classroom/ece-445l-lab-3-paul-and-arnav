@@ -57,7 +57,7 @@ void handleSetting(Time *timeVar, uint32_t switchReading, uint8_t *pos, uint32_t
 void DrawTime(uint8_t timeMode, uint8_t displayMode, uint8_t colorScheme, uint8_t *prevColorScheme, Time *timeVar);
 void Clock_Delay1ms(uint32_t n);
 
-int main(void){
+int main2(void){
   DisableInterrupts();
   PLL_Init(Bus80MHz);    // bus clock at 80 MHz
   ST7735_InitR(INITR_REDTAB);
